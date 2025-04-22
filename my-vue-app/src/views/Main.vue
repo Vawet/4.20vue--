@@ -10,6 +10,7 @@ import CommonHeader from '@/components/CommonHeader.vue'
             <el-container>
                 <el-header>
                     <common-header />
+                    <!-- 要实现 两个的联动 需要使用pinia -->
                 </el-header>
                 <el-main class="right-main">
                     main
