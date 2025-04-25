@@ -1,16 +1,16 @@
 <script setup>
 import {ref,getCurrentInstance,onMounted} from 'vue'
-import api from '@/api/mockData/api.js'; // 直接导入
-// 如果script中使用到了ref那就要导入
-// import axios from 'axios'
-const {proxy}=getCurrentInstance();
-const getTableData=async ()=>{
-    const data=await proxy.$api.getTableData()
-    console.log(data)
-}
-onMounted(getTableData);
-
+// import api from '@/api/mockData/api.js'; // 直接导入
+import axios from 'axios'
+// const {proxy}=getCurrentInstance();
 // proxy.$api.getTableData();
+// const getTableData=async ()=>{
+//     const data=await proxy.$api.getTableData()
+//     console.log(data)
+// }
+// onMounted(getTableData);
+
+
 
 const getImageUrl=(user)=>{
     return new URL(`../assets/images/${user}.png`,import.meta.url).href
@@ -39,19 +39,19 @@ const tableLabel = ref({
     totalBuy: "总购买",
 })
 
-// axios({
-//     url:'/api/home/getTableData',
-//     // 添加了api的前缀，表示通过代理转发
-//     method:'get'
-// }).then(res=>{
-//     console.log(res.data)
-//     if(res.data.code===200){
-//         console.log(res.data.data.tableData)
-//         tableData.value=res.data.data.tableData
-//     }
-// }).catch(err=>{
-//     console.log(err)
-// })
+axios({
+    url:'/api/home/getTableData',
+    // 添加了api的前缀，表示通过代理转发
+    method:'get'
+}).then(res=>{
+    console.log(res.data)
+    if(res.data.code===200){
+        console.log(res.data.data.tableData)
+        tableData.value=res.data.data.tableData
+    }
+}).catch(err=>{
+    console.log(err)
+})
 
 
 
@@ -82,6 +82,9 @@ const tableLabel = ref({
                 <el-table :data="tableData">
                     <!-- 从上面获取假数据 -->
                     <el-table-column v-for="(val,key) in tableLabel" :key="key" :prop="key" :label="val">
+                        <template #default="{row}">
+                            {{ row[key] }}
+                        </template>
                     </el-table-column>
                 </el-table>
             </el-card>
