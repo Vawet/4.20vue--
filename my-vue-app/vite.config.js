@@ -17,6 +17,16 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': '/src',
+      // 设置别名是在这里设置啊
     }
+  },
+  server: {
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://localhost:5173',
+    //     changeOrigin: true,
+    //     rewrite: (path) => path.replace(/^\/api/, '')
+    //   }
+    // }
   }
 })

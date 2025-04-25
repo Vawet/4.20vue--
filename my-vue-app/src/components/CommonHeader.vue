@@ -1,7 +1,9 @@
 <template>
     <div class="header">
         <div class="l-content">
-            <el-button size="small">
+            <el-button size="small" @click="handleCollapse">
+                <!-- 所以这个函数在下面的定义 -->
+                <!-- 当点击这个按钮的时候就切换 isCollapse的状态 -->
                 <component class="icons" :is="menu"></component>
                 <!-- 意思是说这个时候是在渲染menu组件 -->
             </el-button>
@@ -30,13 +32,27 @@
         </div>
     </div>
 </template>
+
+
 <script setup>
 import { ref, computed } from 'vue'
+import { useAllDataStore } from '../stores'
+import {Fold,Expand} from '@element-plus/icons-vue' 
+// 这个是我自己从deepseek上学到的
+const menu=computed(()=>store.state.isCollapse?Expand:Fold)
+// 我们根据isCollapse的值来动态响应式修改图标的内容
 const getImageUrl = (user) => {
     return new URL(`../assets/images/${user}.png`, import.meta.url).href
 }
-// 为什么要写后面的import.meta.url呢
+// 为什么要写后面的import.meta.url呢    函数的格式()=>{}
+const store=useAllDataStore()
+const handleCollapse=()=>{
+    store.state.isCollapse=!store.state.isCollapse
+}
+//跨组件之间的传值  
 </script>
+
+
 <style lang="less" scoped>
 .header {
     display: flex;

@@ -1,6 +1,7 @@
 <script setup>
 import CommonAside from '@/components/CommonAside.vue'
 import CommonHeader from '@/components/CommonHeader.vue'
+
 </script>
 
 <template>
@@ -14,10 +15,12 @@ import CommonHeader from '@/components/CommonHeader.vue'
                      <!-- 秒的fw -->
                 </el-header>
                 <el-main class="right-main">
-                    main
+                    <router-view></router-view>
+                    <!-- 这是在渲染核心的Home.vue界面 -->
                 </el-main>
             </el-container>
         </el-container>
+        
     </div>
 </template>
 
