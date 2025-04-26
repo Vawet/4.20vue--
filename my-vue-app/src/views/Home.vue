@@ -1,11 +1,12 @@
 <script setup>
 import {ref,getCurrentInstance,onMounted} from 'vue'
-// import api from '@/api/mockData/api.js'; 
 // import axios from 'axios'
-
 const {proxy} = getCurrentInstance();
-// 解构
-proxy.$api.getTableData();
+// console.log(proxy.$api); // 查看是否定义，结构是否符合预期
+// // 解构
+// proxy.$api.getTableData().then(data=>{
+//     console.log(data)
+// });
 
 
 const getImageUrl=(user)=>{
@@ -38,7 +39,7 @@ const tableLabel = ref({
 const getTableData=async ()=>{
     const data=await proxy.$api.getTableData()
     console.log(data)
-    tableData.value=data.tableData
+    tableData.value=data
 }
 
 onMounted(()=>{getTableData()});
@@ -49,7 +50,7 @@ onMounted(()=>{getTableData()});
 //     // 添加了api的前缀，表示通过代理转发
 //     method:'get'
 // }).then(res=>{
-//     console.log(res.data)
+//     console.log(res)
 //     if(res.data.code===200){
 //         console.log(res.data.data.tableData)
 //         tableData.value=res.data.data.tableData

@@ -20,15 +20,15 @@ export default defineConfig({
       // 设置别名是在这里设置啊
     }
   },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5174/home/getTableData',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    },
-    historyApiFallback: false,
-    // 禁用SPA回退
-  }
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'http://localhost:5174/home/getTableData',
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/api/, '')
+  //     }
+  //   },
+  //   historyApiFallback: false,
+  //   // 禁用SPA回退
+  // }
 })

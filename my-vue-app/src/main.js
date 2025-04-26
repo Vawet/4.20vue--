@@ -8,8 +8,8 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // 这是在使用完整的引入的方法导入elementplus插件
 import { createPinia } from "pinia"
 import "@/api/mock.js"
-
-import api from "@/api/mockData/api.js"
+//只有开启这个mock拦截才会生效
+import api from "@/api/api.js"
 // 导入Mock数据
 const pinia = createPinia()
 const app = createApp(App)
