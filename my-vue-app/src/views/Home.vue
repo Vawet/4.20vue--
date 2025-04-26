@@ -1,15 +1,11 @@
 <script setup>
 import {ref,getCurrentInstance,onMounted} from 'vue'
-// import api from '@/api/mockData/api.js'; // 直接导入
-import axios from 'axios'
-// const {proxy}=getCurrentInstance();
-// proxy.$api.getTableData();
-// const getTableData=async ()=>{
-//     const data=await proxy.$api.getTableData()
-//     console.log(data)
-// }
-// onMounted(getTableData);
+// import api from '@/api/mockData/api.js'; 
+// import axios from 'axios'
 
+const {proxy} = getCurrentInstance();
+// 解构
+proxy.$api.getTableData();
 
 
 const getImageUrl=(user)=>{
@@ -39,22 +35,28 @@ const tableLabel = ref({
     totalBuy: "总购买",
 })
 
-axios({
-    url:'/api/home/getTableData',
-    // 添加了api的前缀，表示通过代理转发
-    method:'get'
-}).then(res=>{
-    console.log(res.data)
-    if(res.data.code===200){
-        console.log(res.data.data.tableData)
-        tableData.value=res.data.data.tableData
-    }
-}).catch(err=>{
-    console.log(err)
-})
+const getTableData=async ()=>{
+    const data=await proxy.$api.getTableData()
+    console.log(data)
+    tableData.value=data.tableData
+}
+
+onMounted(()=>{getTableData()});
 
 
-
+// axios({
+//     url:'/api/home/getTableData',
+//     // 添加了api的前缀，表示通过代理转发
+//     method:'get'
+// }).then(res=>{
+//     console.log(res.data)
+//     if(res.data.code===200){
+//         console.log(res.data.data.tableData)
+//         tableData.value=res.data.data.tableData
+//     }
+// }).catch(err=>{
+//     console.log(err)
+// })
 
 </script>
 

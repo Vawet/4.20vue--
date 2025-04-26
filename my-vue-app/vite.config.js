@@ -21,12 +21,14 @@ export default defineConfig({
     }
   },
   server: {
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://localhost:5173',
-    //     changeOrigin: true,
-    //     rewrite: (path) => path.replace(/^\/api/, '')
-    //   }
-    // }
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5174/home/getTableData',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    },
+    historyApiFallback: false,
+    // 禁用SPA回退
   }
 })
